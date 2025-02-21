@@ -1,0 +1,362 @@
+# 我的第一篇文章
+这是我在 GitHub 上发表的第一篇文章
+
+Problem Chosen
+D	2024
+ShuWei Cup
+Summary Sheet	Team Control Number
+2024100829421
+________________________________________
+Title   Evaluation of Urban Resilience and Sustainable 
+Development Capacity
+
+In recent years, the question of how cities can develop in a high-quality and sustainable manner in the future has attracted a great deal of attention from the State and society, especially the development of second- and third-tier cities. As China's population ages, and for the first time in 2022 there will be negative population growth, this will affect the development of cities, especially second- and third-tier cities. 
+For Problem 1, we study future house prices and estimate the existing housing stock, which needs to be combined with the city's population size and total GDP. The methodology we use for this problem is to first exclude all data containing N/A, and depending on the weights build a random forest regression model to predict future house prices, estimate the error value using a root mean square error equation, and apply a kernel density estimation function - the Gaussian kernel function to project the population density and make specific estimates of the housing stock, and finally perform an overall error analysis.
+For Problem 2, we need to study each service sector in the two cities for quantitative analysis, analysing commonalities and peculiarities, as well as their respective strengths and weaknesses. For this problem, we start with variable construction for the data. For each aspect in the following annexes, features are extracted one by one to compare the data share of different services and identify the strengths and weaknesses of each city based on the difference in the share of services and the Adams Smith theory and David Ricardo theory of international trade.
+For Problem 3, we need to look at the specific weaknesses of the two cities, their resilience to extreme weather, the key areas that need to be developed in the future and the cities' long and short term investment plans. For this problem we need to use hierarchical analysis to derive the weights assigned to the fourteen categories, use the AHP algorithm to derive the scores for the fourteen categories to get the weighting relationships between the categories and to derive the total city scores. This is combined with a bar chart to identify weaknesses, visualise the data and determine the investment plan.
+For question four, we need to draw up the future plans of the two cities separately. On the basis of the conclusions obtained in question three, combined with our enquiry about the actual development of the two cities in recent years, we will conduct SWOT analyses on various fields of the two cities, so as to know the development needs of each city, and thus determine the direction of investment in various fields and the development of the cities.
+Key words : random forest regression model , kernel density estimation function - the Gaussian kernel function , variable construction , AHP algorithm , visualise the data , SWOT analyses
+
+ 
+content
+1. Introduction	3
+1.1 Background	3
+1.2 Work	3
+2. Problem analysis	4
+2.1 Data analysis	4
+2.2 Analysis of question one	5
+2.3 Analysis of question two	5
+2.4 Analysis of question three	6
+2.5 Analysis of question four	6
+3. Symbol and Assumptions	6
+3.1 Symbol Description	6
+3.2 Fundamental assumptions	7
+4. Model	8
+4.1 Problem 1 modelling and solution	8
+4.1.1 Random Forest Modelling and Solution	8
+4.1.2 Analysis of errors	10
+4.1.3 Spatial distribution modelling	10
+4.2 Problem 2 modelling and solution	11
+4.2.1 Quantitative analysis	11
+4.2.2 Analysis of commonalities and differences	12
+4.2.3 Strengths and weaknesses extracted and analysed	12
+4.3 Problem 3 modelling and solution	13
+4.3.1 City Score and Resilience Analysis	13
+4.3.2 Urban development priorities	14
+4.3.3 Investment plans	15
+4.4 Problem 4 solution	16
+4.4.1 SWOT analysis	16
+4.4.2 City development planning	16
+5.Test the Models	18
+5.1 Random Forest Model Testing	18
+5.1.1 Stability testing	18
+5.1.2 Test Analysis Sheet	18
+5.1.3 Graphical illustrations and analyses	19
+6. Sensitivity Analysis	20
+7.Strengths and Weakness	21
+7.1 Random Forest Model Advantages	21
+7.2 Random Forest Model Disadvantages	21
+8.Conclusion	22
+References	24
+ 
+1. Introduction
+1.1 Background
+    In today's social situation of high pressure of life and work, young people are more often choosing to be in a single state of living alone, which makes China's fertility rate show a decreasing trend for the first time since 2022, and it has been continuing to this day. Since COVID-19 in 2023, the economy of many cities has been declining, especially in second and third tier cities. With the aging of the population and the intensification of global warming, how cities can develop in a high quality and sustainable manner, as well as the resilience of cities in the face of extreme weather, has become an issue that needs to be urgently discussed and resolved.
+
+1.2 Work
+The resilience of cities to extreme weather and their future sustainability are central issues in modern development planning. Sustainable development should not only take into account the current social requirements, but also need to integrate the city's resources to consider the rational application of future resources, to ensure that the city in the economic, social, natural environment and other aspects of the long-term balanced development can be effective.
+In Question 1, the question asks us to predict the future house prices in city1 and city2 and estimate the housing stock in the two cities. In addition to the data given in the question, we need to estimate the housing stock as well as the household population and the GDP of the city, and we need to delete all columns containing N/A due to the presence of inapplicable data, and delete any data that is too large in order to prevent the problem of over-generalisation. Finally, we need to use the root mean square error function to count the errors to prevent inaccuracies in the predicted data due to the presence of too large errors.
+In Question 2, the question asks us to quantitatively analyse the different service industries in city1 and city2, and to come up with similarities and differences between the two cities, and analyse the strengths and weaknesses of the cities. For this, we need to construct variables for the data, work out the difference in the share of services, and analyse the relative and absolute advantages of the cities using Adams Smith's theory to arrive at the final result.
+In Question 3, the question asks us to look at the specific weaknesses of city1 and city2, the resilience of the city in extreme weather conditions, and the key areas of development and types of investment. We need to use hierarchical analysis as well as the APH algorithm to visualise the data to analyse the weaknesses of each city. The investment categories were analysed in the context of local urban development using the efficient market hypothesis as well as the capital asset pricing model, and local market sensitivities needed to be taken into account.
+In Question 4, the question asks us to formulate a development plan for two cities. The question requires us to synthesise the resilience of the cities and the share of each service sector, to consider the development needs of the local cities, and to consult relevant information to provide our own views on the future direction of urban development.
+
+
+2. Problem analysis
+2.1 Data analysis
+Analysing the latitude and longitude of Data 1 and Data 2, it is easy to find that CITY1 is Changchun and CITY2 is Hohhot.
+ 
+the map of China
+And, it was found that N/A means this data is not applicable in this table, so data cleaning is needed to remove all the data containing N/A before subsequent modelling calculations.
+Next, we need to categorise and analyse all the data, Data 1 and Data 2 are categorised according to the total number of data and the range of house prices, Data 3 and Data 4 need to categorise the number of different service categories according to CITY1 and CITY2 respectively, and draw bar charts for subsequent modelling.
+
+2.2 Analysis of question one
+To address the problem of predicting future house prices and estimating the existing housing stock in the two cities given in Question 1, the data first needs to be processed by removing all data containing N/A as they represent inapplicable values. Then the data given is analysed for correlation between the data and it is found that there is no linear relationship between the house price data and other data, but it has an impact on the house price, so the Random Forest model is used to predict the extent of the impact of different data on the house price as well as the correlation, to judge its percentage and importance, to consider these factors and to predict the future house price. Due to the limitation of data and error, we need to use the root mean square error to analyse the error of the predicted house price model, so as to reduce the error caused by the error as much as possible. At the same time, in the optimisation model, we need to remove the maximum and minimum values that have a large gap with the GDP per capita and the average house price, so as to reduce the house price prediction error. For the estimation of the housing stock, we need to find out the GDP per capita of the two cities, and according to the plot ratio, greening rate and the population of each area given in the question, and use the Gaussian kernel function in the kernel density estimation to determine the density of the housing in each location, so as to estimate the per capita housing area, to deduce the final results we need. 
+2.3 Analysis of question two
+In order to quantitatively analyse the service level of Changchun and Hohhot with the data given in question 2, so as to derive the commonalities and uniqueness of the cities and their respective advantages and disadvantages, we need to carry out clustering statistics on the data given to derive the number of different products in the 14 service categories of the two cities, and construct variables on the data, analyse the commonalities and differences in the different services through bar charts, and finally compare the market share of different services based on the theory of market economics of Adam Smith, and analyse the absolute advantage and relative advantage of each service one by one. The common points and differences in the different services are analysed, and the market share of different services is compared. Finally, based on Adam Smith's theory of market economics, the absolute advantage and relative advantage of each service are analysed one by one, and the absolute advantage of the city is concluded and is regarded as the city's advantageous point, the relative advantage is regarded as the city's consideration of sustainable development point, and the other is regarded as the city's disadvantageous point and analysed on the basis of the statistical data. Improvement methods are analysed based on statistical data.
+2.4 Analysis of question three
+For the problem of resilience of two cities in extreme weather conditions and the sustainability of the city, we need to process the data based on Problem 2, analyse the data hierarchically, and derive the proportionate weights of the 14 service categories, and use the APH algorithm to derive the relationship matrix between the different weights, and to derive the total score of the city's sustainable development assessment. The fuzzy comprehensive evaluation method was applied to score the resilience of each resilience, and the overall resilience score was calculated by combining the affiliation function. Bar charts are used to visualise the data, so as to derive the investment needs and development trends in each area, and according to the development of the market and the level of people's consumption needs, so as to derive the economic points of the market that need to be improved, as well as the long and short-term investment in the project.
+2.5 Analysis of question four
+In response to question four, which requires us to plan for the future development of both cities, as well as a sustainable development plan, we need to use a SWOT analysis to analyse the strengths, weaknesses, opportunities and challenges of each city. Sustainability requires not only considering the current use of resources, but also planning for resources to ensure that there are sufficient resources within the next ten years, and that sufficient resources can be created for the next twenty years. A multivariate optimisation analysis of the two cities is required and the Pareto Optimality Model is used to analyse the optimal solutions in different aspects to obtain a strategic plan for sustainable development of the cities.
+
+	Symbol and Assumptions
+3.1 Symbol Description
+Table 1: Definition and description of symbols
+Ti	Each of decision tree
+U	Data sets (full set)
+Ui	Subsets
+P	The price of houses
+N	The number of decision tree
+x	Eigenvector (math.)
+Pj	The actual house price
+(Pj) ̂	 The model's predicted house price
+n	The number of samples in the test set
+K	The kernel function
+Hi	 The total number of households
+D(x,y)	Arbitrary coordinate points on the map.
+Ej	Difference in service share
+	
+	
+	
+	
+	
+	
+	
+	
+
+3.2 Fundamental assumptions
+1. The data given in the question are assumed to be true and reliable.
+2. It is assumed that the additional data found at the National Statistical Office are true and reliable.
+3. It is assumed that there are no other influencing factors in the question except the conditions given in the question.
+4. The modelling takes into account only the factors given in the question and excludes all other external factors.
+5. Disaster resilience and sustainability are relatively independent assessment dimensions.
+6. It is assumed that both long-term and short-term investments are based on the need to restore urban development after a disaster.
+7. It is assumed that the modelling theories mentioned in the title are all up-to-date theoretical results.
+
+
+
+
+
+
+
+
+4. Model
+4.1 Problem 1 modelling and solution
+
+
+
+
+
+
+
+
+
+
+
+
+
+4.1.1 Random Forest Modelling and Solution
+We chose to use a regression model to predict future house prices. We categorised the house price data according to: gentrified, middle class and wealthy neighbourhoods, with CITY1 divided into nine categories and CITY2 into three   
+Classification of city1          Classification of city2
+There is a relationship between house prices and each of the factors, and our application programme calculates the different eigenvalues of each factor to determine the extent to which each factor affects house prices.
+  
+Eigenvalues of city1               Eigenvalues of city2
+Considering the non-linearity of the relationship between house prices and other characteristics, we use a random forest regression model. 
+The model is set up as follows:
+Random forest regression consists of multiple regression trees, each trained on a different subset of the data.
+The specific formula is as follows:
+For each decision tree Ti, a subset Ui is generated from the dataset U with putative ground sampling.
+Each decision tree divides the data based on features and constructs nodes, and the output of the tree is the average house price prediction of the samples on the leaf nodes.
+Let the random forest model contain N trees and the model output is:
+
+P ̂=1/N ∑_(i=1)^m▒〖Ti（x）〗
+
+In the Empirical Study on the Relationship between House Prices and Residents' Income in Small and Medium-sized Cities (Li Huizhi and Li Qingquan, 2022)[1], it is mentioned that, ’The wealth effect refers to the fact that the more people's assets are, the stronger their consumption desire is. At present, the development of the financial market in small and medium-sized cities is not mature enough, and there is a single channel of investment for the residents' families, and the property can not only satisfy the needs of their own residence, but also be used to avoid inflation. Therefore, the rise in housing prices will affect the wealth status of all types of families, thus affecting the residents' income gap.’ As well as ‘There has long been the notion that “renting is despised and buying is valued”.’ It can be seen that the rich will choose to hoard houses while the average person will only choose to buy one house, so we can remove overpriced houses and ignore the rich factor for the time being.
+  
+house price forecasts for city1       house price forecasts for city2
+
+The most predictive formula for house prices:
+
+P ̂=W_H∙H+W_F∙F+W_M∙M+W_A∙A+W_U∙U
+4.1.2 Analysis of errors
+The error of the random forest model is measured using the root mean square error. In conjunction with the title, RMSE is defined as follows:
+
+RMSE=√(1/n ∑_(j=1)^n▒〖(Pj-(Pj) ̂)〗^2 )
+
+Where Pj is the actual house price, (Pj) ̂ is the model's predicted house price, and n is the number of samples in the test set.
+4.1.3 Spatial distribution modelling
+To demonstrate the housing density distribution in the city, we use a housing density map to visualise the total number of households through the latitude and longitude coordinates of each community. Let the longitude and latitude of each neighbourhood be loni and lati, respectively, and the magnitude of its housing density is denoted as the total number of households Hi. For the spatial distribution, the housing density of a neighbourhood can be represented using a Gaussian kernel function, K Its density function is:
+
+D(x,y)=∑_(i=1)^k▒〖Hi∙K(x-loni,y-lati)〗
+
+Where K is the kernel function and (x,y) are arbitrary coordinate points on the map.
+
+  
+Housing density distribution in city1      Housing density distribution in city2
+According to the definition of volumetric ratio we find that in order to derive the housing stock of a place, it is necessary to take into account the number of households in the area, the registered population of the city, the GDP of the city, and the greenness rate, and to analyse the ratio to derive the housing data in order to calculate the total housing stock of the area.
+So we apply the code (see appendix for details) to derive that the housing stock in city1 is 56690280 square metres and the housing stock in city2 is 13374600 square metres.
+
+
+4.2 Problem 2 modelling and solution
+4.2.1 Quantitative analysis
+Data preparation: It is necessary to count the service products contained in the different types of services in the two cities given in the question to get the number of different products in city1 and city2 respectively, so as to facilitate the subsequent comparison.
+We first calculated the number of services in the city for each sector to determine their absolute level. A higher number of services usually indicates a wider coverage of services in that sector. In order to quantitatively compare the relative service levels of each sector in the two cities, we normalised the number of services in each sector to a percentage of the total number of services. This normalisation allows for cross-city comparisons of service levels. For the service share of sector j in a city, it is defined as follows:
+
+P_(12,j)=S_(12,j)/T_12 ×100%
+
+Where P12,j denotes the share of the number of services in sector j in city 1 or city 2.
+4.2.2 Analysis of commonalities and differences
+In order to analyse the commonalities and differences between the two cities, we need to calculate the differences in the share of services for each sector.
+We can draw a comparative bar chart based on the above statistics, and the following is an analysis of the bar charts for the four service categories:
+  
+  
+
+In order to analyse the commonalities and differences between the two cities, we calculate the difference in service share for each sector. Define the difference vector E=[E1,E2,...,En], where Ej denotes the difference in service share between city 1 and city 2 in sector j. The calculation formula is:
+
+E_j=P_(1,j)-P_(2,j)
+
+1. If Ej>0, city 1 has a higher share of services in sector j than city 2, indicating that the sector may be a service advantage for city 1;
+2. if Ej<0, then City 2 has a higher share of services in sector j than City 1, indicating that the sector may be a service advantage for City 2.
+4.2.3 Strengths and weaknesses extracted and analysed
+   In order to extract the absolutely dominant service sector of the city, Adam Smith's theory of absolute dominance will be used for the extraction. It is mentioned in Adam Smith's theory of absolute dominance : Absolute cost refers to the absolute difference in the cost of labour to produce a product between a given two countries, i.e., the cost of labour expended in one country is absolutely lower than in the other.
+David Ricardo's theory: the difference in labour productivity between two countries is not equal for any product. Each country should concentrate on producing and exporting the products in which it has a comparative advantage and importing the products in which it has a comparative disadvantage (i.e., ‘the better of the two is the better, and the worse of the two is the lesser’), so that both sides can save labour and reap the benefits of an increased specialization in the division of labour.
+Dominant Sector: For City 1, we choose the sector with the larger value of Ej>0 as its dominant sector. Similarly, for city 2, we choose the sector with Ej<0 and smaller value as its dominant sector.
+
+ 〖Strengths Sector〗_city1={j│E_j>0 & E_jmax }
+ 〖Strengths Sector〗_city2={j│E_j<0 & E_jmin }
+
+At the same time, we can construct the strengths and weaknesses matrix, where each element Ei,j denotes the strength (1) or weakness (-1) of city i in sector j .
+
+E_(i,j)={█(1,if(i=1 &&&and E_j>0) or (i=2 and D_j<0)@0,if E_j=0@-1,if(i=1 &&&and E_j<0) or (i=2 and D_j>0))┤
+4.3 Problem 3 modelling and solution
+ 
+4.3.1 City Score and Resilience Analysis
+In order to test out the resilience of the city under extreme weather conditions and the sustainability of the city, we need to calculate the weights occupied by each of the 14 sectoral service levels mentioned in Question 2 and use the APH algorithm (see Appendix for details) to derive the total scores of each of the 14 categories with different weight shares, where Aj denotes the weight share of each category, and j is a different type of service in the 14 categories, and use the SPSS to determine the weighting relationship between the service levels of the 14 middle sectors to derive the total city score:
+
+A=∑_(j=1)^(1,2,3,...,13,14)▒〖A_j∙J〗
+
+ 
+Scores and weights for city1 and city2
+
+Based on the overall city score, the sustainability of the city can be inferred; the higher the score the better the city is doing and the better the city's urban resilience in dealing with extreme weather.
+
+4.3.2 Urban development priorities 
+Based on the scores and weights, the following key areas can be identified:
+	Key areas for City 1:
+	Science Education Culture
+	Living services
+	Transport Facilities
+	Medical and Health
+	Retail services
+	Focus areas of City 2:
+	Public Facilities
+	Finance and insurance
+	Accommodation services (relative competitiveness)
+4.3.3 Investment plans
+Short-term investment plan (within 1-3 years)
+	City 1:
+	Science, education and culture: increase investment in universities and research institutes to encourage innovation and scientific co-operation.
+	Transport Facilities: Improve the public transport system with additional bus routes and consider the introduction of intelligent transport systems.
+	Medical and healthcare: upgrade existing medical facilities and increase community health service centres to meet the needs of residents.
+	City 2:
+	Public Facilities: Optimise the configuration of existing public facilities and upgrade the level of infrastructure services, such as parks and libraries.
+	Finance and insurance: establish a financial services platform to attract venture capital and insurance companies, and improve the diversity of financial products.
+	Accommodation services: improve the quality of accommodation facilities, especially during peak tourist periods, and promote the development of the B&B market.
+Long-term investment plan (within 3-10 years)
+	City 1:
+	Retail services: build a comprehensive online and offline retail ecosystem, promote the development of local brands as well as the integration of e-commerce platforms.
+	Living services: develop a smart community platform to enhance residents' convenience and well-being.
+	Medical and healthcare: establish a high-end medical centre with a professional talent training system to internationalise medical services.
+	City 2:
+	Finance and insurance: guide the development of financial technology in the long term and support the application of digital currency and blockchain technology.
+	Science, education and culture: build more cultural and museum projects to enhance the city's cultural heritage and attractiveness.
+	Tourism development: attract tourists through large-scale events and gradually develop into a well-known tourist destination.
+Risk Assessment and Adjustment:
+In implementing these investment plans, it is necessary to pay attention to market changes and the policy environment, and regularly monitor the effectiveness of the investments so as to be able to flexibly adjust the strategies to ensure the full utilisation of resources and effective returns.
+
+4.4 Problem 4 solution
+4.4.1 SWOT analysis
+  
+4.4.2 City development planning
+4.4.2.1 Changchun (City 1) Development Planning
+1. Infrastructure Improvement
+Continue to expand the public transportation network, including increasing bus routes and optimising the underground system, while introducing intelligent traffic management systems to enhance traffic efficiency. Enhance the construction of public facilities in the community, such as parks, sports venues, cultural centres, etc., to improve the quality of life of residents.
+2. Education and Science and Technology Innovation
+Increase investment in tertiary institutions and research institutes, encourage co-operation with enterprises, promote technological transformation, and form a good mode of co-operation between industry, academia and research institutes.Set up a science and technology innovation incubator to attract start-ups and scientific and technological talents, and provide financial support and policy support.
+3. Economic diversification
+Encourage the development of local brands and support retail models that integrate online and offline to enhance the overall consumer experience.Capitalise on the rich cultural resources and develop tourism projects with cultural and ecological themes to attract tourists.
+4. Social Governance and Environmental Protection
+Establish a more efficient social governance system, strengthen community organisations and encourage residents to participate in public affairs. Implement sustainable development policies, promote green buildings and low-carbon travelling, and upgrade the city's environmental protection level.
+5. Industrial transformation and upgrading
+continue to consolidate Changchun's position as an automobile city, encourage the transformation of traditional automobile manufacturing to new energy vehicles and intelligent internet-connected vehicles, and promote the development of related supporting industries. Guide scientific and technological innovation, support the development of R&D institutions and high-tech enterprises, especially in the fields of electronic information, biomedicine and new materials.
+4.4.2.1 Hohhot (City 2) Development Planning
+1. Upgrading infrastructure
+Targeting areas with high scores for public facilities, more investment will be made, especially in the construction of parks, libraries and community service centres, to enhance the convenience of residents. Gradually improve the transport network, especially public transport connecting major commercial and residential areas, to increase travelling efficiency.
+Hohhot's proximity to Inner Mongolia, where sandstorms occur frequently, and where there are too few emergency response sites, needs to be improved.
+2. Finance and economic development
+Grasp the advantages of the China-Mongolia-Russia Jinping Corridor, develop transport so that the economy can intermingle, expand foreign investment, attract foreign investment and develop the foreign economy Optimise residential development policies to ensure the comfort and safety of the living environment and improve the quality of life of residents.
+3. Education and skills training
+Invest in primary and secondary education and vocational training to improve the overall quality and skills of residents to meet the needs of future economic development. Organise various cultural activities and festivals to promote the cultural advantages of Inner Mongolia, enhance the cultural atmosphere of the city, and improve the sense of participation and belonging of the citizens.
+4. Tourism and accommodation services
+Tap into local characteristics and create unique tourism products to attract tourists. Also enhance the quality of accommodation services to meet different levels of demand. Strengthen city branding and raise the city's profile through social media and promotional activities.
+
+5.Test the Models
+5.1 Random Forest Model Testing
+5.1.1 Stability testing
+We analyse the accuracy of the model as well as the stability of the model by applying linear regression (least squares) through SPSS.
+1. by analysing the F-value, to analyse whether it can significantly reject the original hypothesis that the overall regression coefficient is 0 (P<0.05), if it is significant, it indicates that there is a linear relationship, as for the strength of the linear relationship, it needs to be further analysed.
+2. Analyse the model fit by R² value, and also analyse the VIF value, if the model shows covariance (VIF greater than 10 or 5, strictly 10), it is recommended to use ridge regression or stepwise regression.
+3. analyse the significance of X; if it presents significance (P<0.05), it is used to explore the relationship between X and Y.
+4. compare and analyse the degree of influence of X on Y in conjunction with the value of the regression coefficient B.
+5. Determine to get the model formula (Tips: before using linear regression can be verified by statistical class methods such as normality test, etc. to clean the data, but also can be used in the data processing of outliers and other methods to clean the data).
+5.1.2 Test Analysis Sheet
+ 
+ 
+Note: ***, **, * represent 1 per cent, 5 per cent and 10 per cent significance levels, respectively.
+5.1.3 Graphical illustrations and analyses
+Chart Note: The above table shows the results of the analysis of this model, including the standardised coefficients of the model, t-values, VIF values, R², Adjusted R², etc., which are used for the testing of the model and to analyse the model's formulae. 
+1. Linear regression model requires that the overall regression coefficient is not zero, i.e. there is a regression relationship between the variables. The model is tested based on the F-test results.
+2. R² represents the degree of fit of the curvilinear regression, the closer to 1 the better the result. 
+3. VIF value represents the severity of multicollinearity and is used to check whether the model presents covariance, i.e., there is a highly correlated relationship between the explanatory variables (VIF should be less than 10 or 5, strictly 5) If VIF appears inf, it means that the VIF value is infinite, and it is recommended to check the covariance, or use ridge regression. 
+4. B is the coefficient in the case of a constant. 
+5. standard error = B/t value. 
+6. Standardised coefficient is the coefficient obtained by standardising the data. 
+7. VIF is covariance. 
+8. F(df1,df2) is df1 is equal to the number of independent variables; df2 is equal to the sample size - (number of independent variables + 1). 
+9. The F-test is to determine if there is a significant linear relationship and R² is to determine how well the regression line fits this linear model. In linear regression the main concern is whether the F-test is passed or not, while in some cases there is no necessary relationship between the size of R² and the degree of model interpretation.
+
+Graphical analysis: the analysis of the results of the F-test can be obtained, the significance of the P-value of 0.000***, the level of significance is presented, the rejection of the regression coefficient of 0 of the original hypothesis, so the model basically meets the requirements. For variable covariance performance, variable lon, lat, X, Y VIF value is greater than 10, there is a covariance relationship, easy to remove the covariance of the independent variables or carry out ridge regression or stepwise regression. 
+	Sensitivity Analysis  
+ 
+The figure shows the effect of the fit, with the true values in blue and the test values in green
+
+
+
+7.Strengths and Weakness
+7.1 Random Forest Model Advantages
+	High accuracy: By constructing multiple decision trees and combining their predictions, Random Forests can usually provide higher accuracy and robustness than a single decision tree.
+	High resistance to overfitting: By introducing randomness (e.g., in feature selection and sample selection), Random Forests can effectively reduce the risk of overfitting, especially when the amount of data is small or the dimensionality of features is high.
+	Handling high-dimensional data: Random Forest can effectively handle a large number of features and still perform well in the presence of correlation between features.
+	Automated feature selection: Random Forest can assess the importance of individual features, which helps to understand the extent to which the data and its features affect the model, and hence feature selection.
+	Wide applicability: It can be used for classification and regression problems and is suitable for many types of datasets, both structured and unstructured.
+	Missing value handling: Random Forest has a strong ability to handle missing data and can be trained to some extent using incomplete data.
+	Parallel computing: Since each tree is generated independently, parallel computing can be used to accelerate the training process of the model and improve efficiency.
+	No need for standardisation: Random Forests are not sensitive to the distribution of data and do not require standardisation of input features, which makes the pre-processing step relatively simple.
+7.2 Random Forest Model Disadvantages
+	Poor Interpretation: although Random Forest can provide feature importance scores, the model itself is a black box. Compared to a single decision tree, the results are not easy to interpret and it is difficult to understand the specific impact of each feature on the final prediction.
+	Computational resource consumption: training a large number of decision trees may require greater computational resources and time, especially with large data volumes and many features. This may limit its use in some real-time applications.
+	Feature correlation problem: When features are highly correlated with each other, Random Forest may tend to select some of them while ignoring others, leading to biased assessment of feature importance.
+	Feature importance bias: Feature importance is usually calculated based on metrics such as information gain or Gini impurity, which may lead to overestimation of features that have a high base (e.g., a high number of categories), whereas features that are important but small in scope may be underestimated.
+	Over-reliance on samples: the performance of Random Forests relies heavily on the quality of the training samples. If the training data is biased or noisy, its predictive power may also suffer.
+	Difficulty in handling extremely unbalanced data: When encountering an unbalanced classification problem, Random Forest may tend to predict the major categories, resulting in a decrease in the importance of the minor categories, thus affecting the analysis results.
+	Complexity of model tuning: Random Forests have multiple hyperparameters (e.g. number of trees, maximum depth, etc.) that need to be tuned to achieve the best results, which may increase the complexity of model selection and optimisation.
+	Sensitivity to outliers: although Random Forests are relatively noise-resistant, the stability and accuracy of the model may still be affected in the presence of a high proportion of outliers.
+8.Conclusion
+Changchun is China's famous automobile city, with a strong automobile industry base, represented by the FAW Group, which has formed a complete automobile industry chain. It actively promotes high-tech industries and develops information technology, biomedicine, new materials and other fields. Beyond the traditional manufacturing industry, Changchun is gradually transforming into a modern service industry and innovation-driven development to promote the optimisation and upgrading of economic structure. There is a need to strengthen co-operation with domestic and foreign enterprises to attract investment and promote economic development. Changchun has a well-developed transport network, including railways, highways and airways, and convenient transport conditions promote business and trade exchanges and the movement of people. Infrastructure development continues to advance, providing a favourable living and business environment. Emphasis should be placed on social security and public services to improve the living standards of residents. It has a deep historical and cultural heritage, and actively develops cultural and tourism resources to attract tourists.
+Hohhot, the capital of the Inner Mongolia Autonomous Region, is located inland, connecting the east and the west, and is an important transport hub. It has abundant natural resources, such as coal and rare earth, which contribute to economic development. In recent years, Hohhot's economy has maintained rapid growth, focusing on the development of modern service industry, high-tech industry and cultural tourism industry. Vigorous efforts have been made to develop a green economy and renewable energy, and to promote the coordination of environmental protection and economic development. As population growth and urbanisation accelerate, the city's infrastructure and public services continue to improve, but the city continues to face challenges such as an ageing population and the management of transient populations. Focusing on ecological protection, the city's ecological quality has been enhanced through reforestation and greening projects. Sustainable urban planning is promoted to improve the quality of life for residents. Emphasis is placed on the integration of national and modern cultures and the development of multiculturalism. Investment in education has increased, with significant development of higher education institutions and vocational training organisations to enhance the quality of human resources. Hohhot is at the centre of the China-Mongolia-Russia economic development corridor, and needs to develop its transport in order to better coordinate the economic development of the two countries. Hohhot also needs to build emergency shelters as there are too few of them and dust storms occur frequently.
+Hohhot's economy relies more on resource-based industries and modern services, while Changchun's is based on manufacturing, especially automotive industry, and is gradually transforming into high-tech and service industries. Changchun is overall more complete in terms of infrastructure development, while Hohhot, although also developing rapidly, faces greater pressure on its infrastructure. Both cities face social challenges such as an ageing population, but Changchun has a relatively more developed social security system due to its industrial base and economic scale.
+Through these analyses, it can be seen that Hohhot and Changchun each have their own strengths and challenges in the development process, and should give full play to their own characteristics in future urban development planning and seek a path to sustainable development.
+
+
+
+
+
+
+
+
+
+
+References
+[1] Huizhi Li, An Empirical Study on the Relationship between House Prices and Residents' Income in Small and Medium-sized Cities, Journal of Hunan University of Science and Engineering, Vol. 43, No. 3, 44-46, 2022
+[2] Scientific Platform Serving for Statistics Professional 2021. SPSSPRO. (Version 1.0.11)Retrieved from https://www.spsspro.com. , 11/18/24
+[3] Draper, N.R. and Smith, H. Applied Regression Analysis. China: People's University of China Press, 2014
+[4] Zhihua Zhou, Machine learning [M].First Edition, Beijing:Tsinghua University Press, 2016
